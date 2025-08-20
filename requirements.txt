@@ -1,0 +1,8 @@
+langchain
+langchain_community
+pypdf
+bs4
+arxiv
+fitz
+frontend
+wikipedia
