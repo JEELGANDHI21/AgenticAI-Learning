@@ -1,0 +1,136 @@
+LangGraph : 
+
+LangGraph is a framework (built on top of LangChain) for creating stateful, multi-step AI workflows using a graph-based structure.
+
+Instead of writing “step 1 → step 2 → step 3” in plain Python, you define a graph of nodes (functions, LLMs, tools, etc.) and LangGraph handles:
+
+-> how state flows between them
+-> when branches or loops happen
+-> how to pause/resume executions
+-> how to run multi-agent systems.
+
+
+=============================================================================================================================================================
+
+LangGraph vs CrewAI
+
+In LangGraph,
+
+You build a graph:
+
+Node 1: Take user request (e.g., “Book 2 tickets for Coldplay”).
+Node 2: Query events database.
+Node 3: Check seat availability.
+Node 4: Generate confirmation.
+
+With CrewAI,
+
+You create a crew of agents:
+
+“Planner Agent” → decides steps (check availability, payment, confirmation).
+“Booking Agent” → interacts with the event system.
+“Payment Agent” → handles transactions.
+
+You give them a task: “Book 2 tickets for Coldplay”.
+They talk to each other and divide responsibilities.
+
+
+In short, LangGraph if you want control over the workflow and stat & CrewAI if you want autonomous multi-agent teamwork with less manual wiring.
+
+=============================================================================================================================================================
+
+State : 
+
+The shared memory that flows through your graph.
+Evolving data store that flows through your LangGraph graph, carrying context, inputs, outputs, and memory.
+In LangGraph, for one execution (one run) of a graph, there is exactly one state object that flows through the graph.
+
+LangChain memory = conversation history only.
+LangGraph state = entire evolving context of the workflow.
+
+=============================================================================================================================================================
+
+Node : 
+
+A node is simply a step (function) in your graph.
+
+Each node takes the current state as input.
+It does something (like call an LLM, query a DB, run logic).
+Then it returns updates to the state.
+
+A step (function) in the LangGraph workflow that reads state, does some work, and returns updates to state.
+
+=============================================================================================================================================================
+
+Edges :
+
+An edge defines the connection between nodes.
+
+It tells LangGraph:
+“After this node finishes, go to that node.”
+
+Basically, it’s the arrows between the boxes in your workflow diagram.
+
+Types of Edges
+
+1. Normal Edge → straight connection (Node A → Node B).
+2. Conditional Edge → branching, depends on state (Node A → Node B or Node C).
+3. Loop Edge → you can connect a node back to itself (repeat until condition is met).
+
+Edges in LangGraph are the connections (arrows) that define how the workflow moves from one node to another.
+
+=============================================================================================================================================================
+
+Tool :
+
+A Tool is just a function with metadata that the LLM can call.
+The function could be anything: a calculator, a web search, a database query, an API call.
+
+Tools have a name, description, and arguments schema so the LLM knows when and how to call them.
+
+Without tools → your assistant is limited to text.
+
+With tools → it can do things:
+-> Fetch real-time info (search, weather, finance).
+-> Query structured data (SQL, vector DB).
+-> Automate tasks (send email, control APIs).
+
+Tools = 		
+
+=============================================================================================================================================================
+
+Reducers :
+
+When a node returns updates to the state, LangGraph needs to know how to merge them with the existing state.
+By default: new value overrides the old value.
+Reducer functions let you customize the merge behavior.
+	
+Default behavior: overwrite → “replace the old conversation with the new one.”
+Using add_messages → append → “keep the history and add new messages to it.”
+
+=============================================================================================================================================================
+
+Routing :
+
+Decision-making about where to go next in the graph.
+
+Routing is needed so your LangGraph app can “choose the next step” dynamically, instead of always following the same fixed path.
+
+=============================================================================================================================================================
+
+Agents :
+
+ReAct : Reason + Act
+
+ReAct Loop : 
+
+Act -> model issues a tool call
+Observe -> tool executes, produces a result
+Reason -> model sees the tool output, interprets it, and either: Responds to the user, OR Calls another tool.
+
+Agent = LLM + Memory + Tools + Reasoning Loop
+
+That's why, LangGraph is used for agent architectures — you’re no longer writing fixed chains, the model itself decides the steps.
+
+=============================================================================================================================================================
+

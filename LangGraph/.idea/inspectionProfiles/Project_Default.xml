@@ -1,0 +1,28 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="langchain" />
+          <option value="ipykernel" />
+          <option value="langchain-community" />
+          <option value="bs4" />
+          <option value="arxiv" />
+          <option value="langchain-text-splitters" />
+          <option value="langchain-openai" />
+          <option value="chromadb" />
+          <option value="sentence_transformers" />
+          <option value="langchain_huggingface" />
+          <option value="langchain_chroma" />
+          <option value="pandas" />
+          <option value="openai" />
+          <option value="langchain-groq" />
+          <option value="duckduckgo_search" />
+          <option value="unstructured" />
+          <option value="huggingface_hub" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
