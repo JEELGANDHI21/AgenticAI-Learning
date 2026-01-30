@@ -1,0 +1,4 @@
+{"instruction":"Extract info as JSON","input":"Alice bought 3 books for $12","output":"{\"name\":\"Alice\",\"items\":3,\"price\":12}"}
+{"instruction":"Extract info as JSON","input":"Bob bought 1 pen for $2","output":"{\"name\":\"Bob\",\"items\":1,\"price\":2}"}
+{"instruction":"Extract info as JSON","input":"Carol bought 5 apples for $10","output":"{\"name\":\"Carol\",\"items\":5,\"price\":10}"}
+{"instruction":"Extract info as JSON","input":"David bought 2 notebooks for $6","output":"{\"name\":\"David\",\"items\":2,\"price\":6}"}
